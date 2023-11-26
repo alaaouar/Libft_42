@@ -6,13 +6,13 @@
 /*   By: alaaouar <alaaouar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 10:36:30 by alaaouar          #+#    #+#             */
-/*   Updated: 2023/11/22 10:38:21 by alaaouar         ###   ########.fr       */
+/*   Updated: 2023/11/26 16:26:18 by alaaouar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char	**freethemniga(char **strs)
+static char	**free_strs(char **strs)
 {
 	unsigned int	i;
 
@@ -26,7 +26,7 @@ static char	**freethemniga(char **strs)
 	return (NULL);
 }
 
-static size_t	countsthosemigs(const char *s, char c)
+static size_t	word_count(const char *s, char c)
 {
 	size_t	count;
 	size_t	i;
@@ -47,7 +47,7 @@ static size_t	countsthosemigs(const char *s, char c)
 	return (count);
 }
 
-static char	*racist_copying(const char *str, char c)
+static char	*ft_strcpy(const char *str, char c)
 {
 	int		i;
 	char	*strs;
@@ -80,7 +80,7 @@ static int	strs_alloc(char **strs, const char *s, char c)
 		i++;
 	while (s[i])
 	{
-		strs[j] = racist_copying(&s[i], c);
+		strs[j] = ft_strcpy(&s[i], c);
 		if (!strs[j])
 			return (1);
 		while (s[i] != c && s[i])
@@ -108,11 +108,11 @@ char	**ft_split(char const *s, char c)
 		strs[0] = NULL;
 		return (strs);
 	}
-	w_count = countsthosemigs(s, c);
+	w_count = word_count(s, c);
 	strs = (char **)malloc(sizeof(char *) * (w_count + 1));
 	if (!strs)
 		return (NULL);
 	if (strs_alloc(strs, s, c) == 1)
-		return (freethemniga(strs));
+		return (free_strs(strs));
 	return (strs);
 }
